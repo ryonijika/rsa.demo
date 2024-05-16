@@ -1,10 +1,92 @@
-<!DOCTYPE html>
+<!DOCTYPE	html>
 <html lang="ja">
- <head>
- <meta charset="utf-8">
- <title>RSA</title>
- </head>
- <body>
-  <p>RSA暗号のデモ</p>
- <body>
+	<head>
+		<meta charset="utf-8">
+		<title>RSA</title>
+		<style>
+			body {
+				font-size: 16px;
+			}
+			.container {
+				background: ghostwhite;
+				margin: 5px;
+				padding: 5px;
+			}
+			button { 
+				display: block;
+				padding: 5px;
+				margin: 5px;
+			}
+			h3 {
+				margin: 5px;
+				padding: 5px;
+			}
+			p {
+				padding: 5px;
+				margin: 5px;
+			}
+			label {
+				display: block;
+				padding: 5px;
+				margin: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h3>1. 鍵の作成</h3>
+			<p>鍵を作成します。素数は互いに異なる、十分に大きいものにしてください。（例：853と773）</p>
+			<label>
+				素数p
+				<input id="p_generate" placeholder="853" value="853"/>
+			</label>
+			<label>
+				素数q
+				<input id="q_generate" placeholder="773" value="773"/>
+			</label>
+			<button id="generate" onclick="actionGenerateKeys()">鍵を作成する</button>
+			<p>公開鍵（余剰）▶ <span id="ne_generate"></span></p>
+			<p>公開鍵（指数）▶ <span id="e_generate"></span></p>
+			<p>秘密鍵（余剰）▶ <span id="nd_generate"></span></p>
+			<p>秘密鍵（指数）▶ <span id="d_generate"></span></p>
+		</div>
+		<div class="container">
+			<h3>2. 暗号化</h3>
+			<p>平文を暗号化します。1で作成した公開鍵を使用してください。</p>
+			<label>
+				公開鍵（余剰）
+				<input id="n_encrypt" placeholder="数字を入力"/>
+			</label>
+			<label>
+				公開鍵（指数）
+				<input id="e_encrypt" placeholder="数字を入力"/>
+			</label>
+			<label>
+				暗号化したい文章
+				<input id="text_encrypt" placeholder="平文"/>
+			</label>
+			<button id="encrypt" onclick="actionEncrypt()">暗号化する</button>
+			<p>暗号文 ▶ <span id="encrypted_encrypt"></span></p>
+			<button id="encrypt" onclick="copyToClipboard()">クリップボードにコピーする</button>
+		</div>
+		<div class="container">
+			<h3>3. 復号化</h3>
+			<p>暗号文を復号化します。1で作成した秘密鍵と2で作成した暗号文を使用してください。</p>
+			<label>
+				秘密鍵（余剰）
+				<input id="n_decrypt" placeholder="数字を入力"/>
+			</label>
+			<label>
+				秘密鍵（指数）
+				<input id="d_decrypt" placeholder="数字を入力"/>
+			</label>
+			<label>
+				復号したい暗号文
+				<input id="encrypted_decrypt" placeholder="暗号文"/>
+			</label>
+			<button id="decrypt" onclick="actionDecrypt()">復号する</button>
+			<p>復号文 ▶ <span id="decrypted_decrypt"></span></p>
+		</div>
+		<script src="script.js"></script>
+	</body>
 </html>
