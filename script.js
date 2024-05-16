@@ -43,7 +43,7 @@ function powerMod(base, e, mod) {
 function generateKeypair(p, q) {
     let n = p * q
     let L = (p - 1) * (q - 1) / gcd(p - 1, q - 1)
-    let e = 65537
+    let e = 58049
     let d = 1
 
     do {
