@@ -21,26 +21,6 @@ function IsPrime(p, q){
 	return false
 }
 
-// 拡張ユークリッドの互除法を用いて、ax + by = gcd(a, b) の整数解を求める
-function extendedEuclidean(a, b) {
-    let x0 = 1, y0 = 0;
-    let x1 = 0, y1 = 1;
-    let r0 = a, r1 = b;
-
-    while (r1 !== 0) {
-        let q = Math.floor(r0 / r1);
-        let r2 = r0 % r1;
-        let x2 = x0 - q * x1;
-        let y2 = y0 - q * y1;
-
-        x0 = x1; y0 = y1;
-        x1 = x2; y1 = y2;
-        r0 = r1; r1 = r2;
-    }
-
-    return { gcd: r0, x: x0, y: y0 };
-}
-
 function powerMod(base, e, mod) {
     if (mod == 1) {
     	return 0; // mod1の場合は常に0
@@ -64,13 +44,11 @@ function generateKeypair(p, q) {
     let n = p * q
     let L = (p - 1) * (q - 1) / gcd(p - 1, q - 1)
     let e = 58049
+    let d = 1
 
-    // 秘密鍵d
-    let d = extendedEuclidean(e, L).x;
-    d = d % L;
-    if (d < 0) {
-        d += L;
-    }
+    do {
+    	d += 1
+    } while ((e * d) % L != 1)
 
     let public = {"e": e, "n": n} // 公開鍵
     let private = {"d": d, "n": n} // 秘密鍵
