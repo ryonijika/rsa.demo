@@ -64,7 +64,6 @@ function generateKeypair(p, q) {
     let n = p * q
     let L = (p - 1) * (q - 1) / gcd(p - 1, q - 1)
     let e = 58049
-    let d = 1
 
     // 秘密鍵d
     let d = extendedEuclidean(e, L).x;
